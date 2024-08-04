@@ -33,6 +33,9 @@ public class ProductManagementMenuContributor : IMenuContributor
                 order: 0
             )
         );
+        context.Menu.Items.Add(
+            new ApplicationMenuItem("ProductManagementMenus.Products", l["Menu:Products"], url: "/Products", icon: "fas fa-book", order: 1)
+            );
 
         if (MultiTenancyConsts.IsEnabled)
         {
