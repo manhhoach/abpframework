@@ -1,5 +1,7 @@
 $(function () {
     var l = abp.localization.getResource('ProductManagement');
+    var editModal = new abp.ModalManager(abp.appPath + 'Products/EditProductModal');
+
     var dataTable = $('#ProductsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
@@ -34,7 +36,21 @@ $(function () {
                     title: l('CreationTime'),             
                     data: "creationTime",
                     dataFormat: 'date'
-                }
+                },
+                {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:
+                            [
+                                {
+                                    text: l('Edit'),
+                                    action: function (data) {
+                                        editModal.open({ Id: data.record.Id });
+                                    }
+                                }
+                            ]
+                    }
+                },
             ]
         })
     );
@@ -49,6 +65,8 @@ $(function () {
         createModal.open();
     });
 
-
+    editModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
 })();
 

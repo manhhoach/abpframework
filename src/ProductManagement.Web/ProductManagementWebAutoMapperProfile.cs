@@ -9,5 +9,6 @@ public class ProductManagementWebAutoMapperProfile : Profile
     public ProductManagementWebAutoMapperProfile()
     {
         CreateMap<CreateEditProductViewModel, CreateUpdateProductDto>();
+        CreateMap<CreateEditProductViewModel, ProductDto>().ReverseMap();
     }
 }

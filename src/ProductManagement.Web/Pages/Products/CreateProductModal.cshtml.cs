@@ -1,6 +1,4 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductManagement.Products;
 using System;
@@ -10,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Web.Pages.Products
 {
-    public class CreateProductModalModel : PageModel
+    public class CreateProductModalModel : ProductManagementPageModel
     {
         [BindProperty]
         public CreateEditProductViewModel Product { get; set; }
         public SelectListItem[] Categories { get; set; }
         private readonly IProductAppService _productAppService;
-        private readonly IMapper _objectMapper;
-        public CreateProductModalModel(IProductAppService productAppService, IMapper mapper)
+
+        public CreateProductModalModel(IProductAppService productAppService)
         {
             _productAppService = productAppService;
-            _objectMapper = mapper;
         }
         public async void OnGetAsync()
         {
@@ -34,8 +31,8 @@ namespace ProductManagement.Web.Pages.Products
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            await _productAppService.CreateAsync(_objectMapper.Map<CreateEditProductViewModel, CreateUpdateProductDto>(Product));
-            return StatusCode(204);
+            await _productAppService.CreateAsync(ObjectMapper.Map<CreateEditProductViewModel, CreateUpdateProductDto>(Product));
+            return NoContent();
         }
     }
 }

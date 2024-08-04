@@ -8,7 +8,7 @@ public class ProductManagementApplicationAutoMapperProfile : Profile
 {
     public ProductManagementApplicationAutoMapperProfile()
     {
-        CreateMap<Product, ProductDto>();
+        CreateMap<Product, ProductDto>().ReverseMap();
         CreateMap<CreateUpdateProductDto, Product>();
         CreateMap<Category, CategoryLookupDto>();
     }

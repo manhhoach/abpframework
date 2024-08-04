@@ -31,6 +31,12 @@ namespace ProductManagement.Products
             }
         }
 
+        public async Task<ProductDto> GetAsync(Guid id)
+        {
+            var product = await _productRepository.GetAsync(id);
+            return ObjectMapper.Map<Product, ProductDto>(product);
+        }
+
         public async Task<ListResultDto<CategoryLookupDto>> GetCategoriesAsync()
         {
             var categories = await _categoryRepository.GetListAsync();
@@ -51,6 +57,12 @@ namespace ProductManagement.Products
                 count,
                 ObjectMapper.Map<List<Product>, List<ProductDto>>(products)
             );
+        }
+
+        public async Task UpdateAsync(Guid id, CreateUpdateProductDto input)
+        {
+            var product = await _productRepository.GetAsync(id);
+            ObjectMapper.Map(input, product);
         }
     }
 }
