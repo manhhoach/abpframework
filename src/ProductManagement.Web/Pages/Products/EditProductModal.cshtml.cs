@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductManagement.Products;
 using System;
@@ -16,7 +15,9 @@ namespace ProductManagement.Web.Pages.Products
 
         [BindProperty]
         public CreateEditProductViewModel Product { get; set; }
+
         public SelectListItem[] Categories { get; set; }
+
         private readonly IProductAppService _productAppService;
 
         public EditProductModalModel(IProductAppService productAppService)
@@ -24,7 +25,7 @@ namespace ProductManagement.Web.Pages.Products
             _productAppService = productAppService;
         }
 
-        public async Task OnGetASync()
+        public async Task OnGetAsync()
         {
             var productDto = await _productAppService.GetAsync(Id);
             Product = ObjectMapper.Map<ProductDto, CreateEditProductViewModel>(productDto);

@@ -10,7 +10,7 @@
 
 <abp-dynamic-form abp-model="Product" asp-page="/Products/EditProductModal">
     <abp-modal>
-        <abp-modal-header title="Edit"></abp-modal-header>
+        <abp-modal-header title="Edit @Model.Product.Name"></abp-modal-header>
         <abp-modal-body>
             <abp-input asp-for="Id" />
             <abp-form-content/>
